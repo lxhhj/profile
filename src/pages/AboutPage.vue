@@ -10,6 +10,23 @@ import StackPhysics from '../components/StackPhysics.vue'
 
 const { t, locale } = useI18n()
 
+// chip 随机贴纸抖动量（按索引确定，保证中英切换时布局稳定）
+function chipJitter(i) {
+  const h1 = Math.sin(i * 127.1 + 1.3) * 43758.5453
+  const h2 = Math.sin(i * 269.5 + 2.7) * 12345.6789
+  const h3 = Math.sin(i * 419.2 + 4.1) * 9876.54321
+  const r1 = h1 - Math.floor(h1)
+  const r2 = h2 - Math.floor(h2)
+  const r3 = h3 - Math.floor(h3)
+  return {
+    '--jr': `${((r1 - 0.5) * 5).toFixed(2)}deg`,
+    '--jx': `${((r2 - 0.5) * 6).toFixed(1)}px`,
+    '--jy': `${((r3 - 0.5) * 5).toFixed(1)}px`,
+    '--dur': `${(3.5 + r1 * 2.5).toFixed(2)}s`,
+    '--del': `${(-r2 * 3).toFixed(2)}s`,
+  }
+}
+
 // 经历折叠：收起时显示前 3 条并渐隐最后一条
 const showAll = ref(false)
 const collapsedList = experience.filter((item) => !item.hidden)
@@ -103,6 +120,7 @@ const polaroids = projects.slice(0, 5).map((p) => ({
             :key="item"
             class="wchip"
             :class="i % 2 === 0 ? 'solid' : 'outline'"
+            :style="chipJitter(i)"
           >{{ item }}</span>
         </div>
       </div>
@@ -285,10 +303,32 @@ const polaroids = projects.slice(0, 5).map((p) => ({
 }
 
 .wchip {
-  padding: 9px 18px;
+  padding: 8px 16px;
   border-radius: 999px;
   font-size: 15px;
   letter-spacing: -0.1px;
+  transform: translate(var(--jx), var(--jy)) rotate(var(--jr));
+  animation: chip-drift var(--dur) ease-in-out var(--del) infinite alternate;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+/* 悬停：摆正 + 弹簧放大（与原站一致） */
+.wchip:hover {
+  animation: none;
+  transform: translate(var(--jx), var(--jy)) rotate(0deg) scale(1.035);
+  position: relative;
+  z-index: 2;
+}
+
+/* 静止时的缓慢漂移 */
+@keyframes chip-drift {
+  from {
+    transform: translate(var(--jx), var(--jy)) rotate(calc(var(--jr) - 0.45deg));
+  }
+  to {
+    transform: translate(var(--jx), var(--jy)) rotate(calc(var(--jr) + 0.45deg));
+  }
 }
 
 .wchip.solid {
