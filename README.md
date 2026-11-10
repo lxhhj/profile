@@ -40,3 +40,9 @@ npm run preview  # 本地预览构建结果
 - [Vue Router](https://router.vuejs.org/)
 - 无 UI 框架依赖，纯手写 CSS（CSS 变量主题系统）
 - 技术栈图标来自 [Simple Icons CDN](https://simpleicons.org/)
+
+## 部署（GitHub Pages）
+
+已配置 GitHub Actions 自动部署（`.github/workflows/deploy.yml`）：推送到 `main` 即自动构建并发布到 **https://lxhhj.github.io/profile/**。
+
+> 注意：`vite.config.js` 中的 `base: '/profile/'` 与仓库名保持一致。若仓库改名，需同步修改，站点地址也会随之变化。
