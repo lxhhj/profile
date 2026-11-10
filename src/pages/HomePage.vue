@@ -73,8 +73,9 @@ const { t } = useI18n()
   grid-template-columns: 1fr;
   gap: 48px;
   align-items: center;
-  padding-top: 130px;
-  padding-bottom: 70px;
+  /* 上减下增使居中内容相对原站上移 ~27px（问候语 top≈264px） */
+  padding-top: 103px;
+  padding-bottom: 97px;
 }
 
 @media (min-width: 900px) {
