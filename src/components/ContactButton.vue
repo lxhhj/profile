@@ -1,7 +1,7 @@
 <script setup>
 // 联系按钮：hover 时整个按钮替换为"邮箱 + 复制图标"，点击复制（✓ 反馈），
 // 鼠标移开（或键盘焦点离开）后换回 Contact。
-import { onBeforeUnmount, ref } from 'vue'
+import { ref } from 'vue'
 import { profile } from '../data/profile'
 
 const props = defineProps({
@@ -10,16 +10,15 @@ const props = defineProps({
 
 const revealed = ref(false)
 const copied = ref(false)
-let copiedTimer = null
 
 function show() {
   revealed.value = true
 }
 
+// 复制成功的对勾不自动收回，等鼠标离开（blur）时随整体一起缩回
 function hide() {
   revealed.value = false
   copied.value = false
-  clearTimeout(copiedTimer)
 }
 
 async function copy() {
@@ -29,13 +28,7 @@ async function copy() {
     /* 剪贴板不可用时静默忽略 */
   }
   copied.value = true
-  clearTimeout(copiedTimer)
-  copiedTimer = setTimeout(() => {
-    copied.value = false
-  }, 1400)
 }
-
-onBeforeUnmount(() => clearTimeout(copiedTimer))
 </script>
 
 <template>
