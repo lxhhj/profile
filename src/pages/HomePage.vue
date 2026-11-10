@@ -65,7 +65,8 @@ const { t } = useI18n()
 <style scoped>
 .hero {
   position: relative;
-  min-height: calc(100vh - 120px);
+  /* 外壳上下各 8px 外边距，减去后 Hero 精确占满第一屏 */
+  min-height: calc(100vh - 16px);
   display: flex;
   align-items: center;
   overflow: hidden;

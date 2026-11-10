@@ -20,7 +20,7 @@ const { locale } = useI18n()
     <div class="cover" :style="{ background: props.project.gradient }">
       <span class="emoji">{{ props.project.emoji }}</span>
     </div>
-    <h3 class="title">{{ props.project.title }}</h3>
+    <h3 class="headline">{{ props.project.headline[locale] }}</h3>
     <p class="desc">{{ props.project.desc[locale] }}</p>
     <div class="tags">{{ props.project.tags.join(' · ') }}</div>
   </a>
@@ -30,7 +30,7 @@ const { locale } = useI18n()
 .card {
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 22px;
   border: 1px solid var(--border);
   border-radius: 16px;
   background: var(--card);
@@ -85,7 +85,7 @@ const { locale } = useI18n()
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 .emoji {
@@ -93,12 +93,13 @@ const { locale } = useI18n()
   filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.25));
 }
 
-.title {
+/* 卡片主体大标题 = 产品简介语（与原站格式一致） */
+.headline {
   font-size: 23px;
   font-weight: 600;
   letter-spacing: -0.4px;
   line-height: 1.3;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .desc {
