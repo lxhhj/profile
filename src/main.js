@@ -12,14 +12,15 @@ lenis.on('scroll', () => {})
 const app = createApp(App)
 
 // v-reveal: fade-in-on-scroll directive
+// 用 data 属性而非 class，避免 Vue 重渲染时抹掉指令加的可见状态
 app.directive('reveal', {
   mounted(el) {
-    el.classList.add('reveal')
+    el.dataset.reveal = 'pending'
     const io = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
-            el.classList.add('reveal-visible')
+            el.dataset.reveal = 'visible'
             io.disconnect()
           }
         }

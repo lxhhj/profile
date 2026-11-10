@@ -1,7 +1,8 @@
 <script setup>
-import { profile, socials } from '../data/profile'
+import { socials } from '../data/profile'
 import { useI18n } from '../i18n'
 import SilkBackground from './SilkBackground.vue'
+import ContactButton from './ContactButton.vue'
 
 const { t } = useI18n()
 </script>
@@ -16,13 +17,7 @@ const { t } = useI18n()
             <h2 class="title">{{ t('connect.heading') }}</h2>
             <p class="text">{{ t('connect.text') }}</p>
             <div class="actions">
-              <a class="btn btn-primary" :href="`mailto:${profile.email}`">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="2" y="4" width="20" height="16" rx="3" />
-                  <path d="m2 7 10 6L22 7" />
-                </svg>
-                {{ t('connect.contact') }}
-              </a>
+              <ContactButton :label="t('connect.contact')" />
               <router-link class="btn btn-ghost" to="/projects">
                 {{ t('connect.seeProjects') }}
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

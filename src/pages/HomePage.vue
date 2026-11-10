@@ -1,9 +1,9 @@
 <script setup>
 import { featuredProjects } from '../data/projects'
-import { profile } from '../data/profile'
 import { useI18n } from '../i18n'
 import ProjectCard from '../components/ProjectCard.vue'
 import SilkBackground from '../components/SilkBackground.vue'
+import ContactButton from '../components/ContactButton.vue'
 import logo from '../assets/logo.jpg'
 
 const { t } = useI18n()
@@ -20,13 +20,7 @@ const { t } = useI18n()
           <h1 class="hero-title">{{ t('hero.title') }}</h1>
           <p class="intro">{{ t('hero.intro') }}</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" :href="`mailto:${profile.email}`">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="4" width="20" height="16" rx="3" />
-                <path d="m2 7 10 6L22 7" />
-              </svg>
-              {{ t('hero.contact') }}
-            </a>
+            <ContactButton :label="t('hero.contact')" />
             <router-link class="btn btn-ghost" to="/projects">
               {{ t('hero.seeWork') }}
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
