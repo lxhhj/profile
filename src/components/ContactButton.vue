@@ -55,10 +55,10 @@ async function copy() {
         </svg>
       </Transition>
 
-      <!-- 文字：Contact / 邮箱 / 已复制 -->
+      <!-- 文字：只随 revealed 切换（复制后图标已表达状态，不显示"已复制"字样） -->
       <Transition name="flip" mode="out-in" :duration="{ enter: 220, leave: 240 }">
-        <span :key="copied ? 'copied' : revealed ? 'mail' : 'label'" class="swap-txt">
-          {{ copied ? '已复制' : revealed ? profile.email : props.label }}
+        <span :key="revealed ? 'mail' : 'label'" class="swap-txt">
+          {{ revealed ? profile.email : props.label }}
         </span>
       </Transition>
     </button>
