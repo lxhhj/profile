@@ -91,25 +91,26 @@ const { t } = useI18n()
 
 .greeting {
   font-size: 20px;
+  font-weight: 500;
   letter-spacing: -0.3px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .hero-title {
-  font-size: clamp(40px, 6vw, 58px);
+  font-size: clamp(40px, 6vw, 58.4px);
   font-weight: 500;
   letter-spacing: -0.025em;
-  line-height: 1.06;
-  margin-bottom: 22px;
+  line-height: 1.05;
+  margin-bottom: 16px;
   max-width: 560px;
 }
 
 .intro {
-  font-size: 20px;
-  line-height: 1.55;
+  font-size: 22px;
+  line-height: 1.4;
   color: var(--text-muted);
-  max-width: 440px;
-  margin-bottom: 32px;
+  max-width: 445px;
+  margin-bottom: 26px;
 }
 
 .hero-actions {

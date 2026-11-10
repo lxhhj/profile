@@ -47,8 +47,8 @@ const { isDark, toggleTheme } = useTheme()
   display: flex;
   align-items: center;
   gap: 2px;
-  height: 50px;
-  padding: 0 10px;
+  height: 46px;
+  padding: 0 8px;
   border-radius: 999px;
   background: var(--nav-bg);
   border: 1px solid var(--nav-border);
@@ -59,9 +59,9 @@ const { isDark, toggleTheme } = useTheme()
 
 .pill a,
 .lang {
-  padding: 8px 14px;
+  padding: 6px 16px;
   border-radius: 999px;
-  font-size: 15px;
+  font-size: 14px;
   color: var(--text-muted);
   background: transparent;
   border: none;
@@ -91,8 +91,8 @@ const { isDark, toggleTheme } = useTheme()
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   margin-left: 4px;
   border-radius: 999px;
   border: none;
