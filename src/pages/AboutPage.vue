@@ -1,183 +1,296 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { experience, education } from '../data/experience'
-import { whatIDo, stack } from '../data/skills'
+import { whatIDo, stackPills } from '../data/skills'
+import { projects } from '../data/projects'
 import { useI18n } from '../i18n'
+import SilkBackground from '../components/SilkBackground.vue'
+import PolaroidStrip from '../components/PolaroidStrip.vue'
+import StackPhysics from '../components/StackPhysics.vue'
 
 const { t, locale } = useI18n()
 
+// 经历折叠：收起时显示前 3 条并渐隐最后一条
 const showAll = ref(false)
-const visibleExperience = computed(() =>
-  showAll.value ? experience : experience.filter((item) => !item.hidden),
-)
+const collapsedList = experience.filter((item) => !item.hidden)
+const fullList = [...collapsedList, ...experience.filter((item) => item.hidden)]
+const expList = computed(() => (showAll.value ? fullList : collapsedList))
 const hiddenCount = computed(() => experience.filter((item) => item.hidden).length)
+
+// 宝丽来卡片：取前 5 个项目做占位
+const polaroids = projects.slice(0, 5).map((p) => ({
+  emoji: p.emoji,
+  title: p.title,
+  gradient: p.gradient,
+}))
 </script>
 
 <template>
   <div>
-    <section class="page-head">
-      <div class="container">
-        <h1 class="heading" v-reveal>{{ t('about.title') }}</h1>
-        <p class="para" v-reveal v-html="t('about.p1')"></p>
-        <p class="para" v-reveal v-html="t('about.p2')"></p>
-        <p class="para" v-reveal v-html="t('about.p3')"></p>
+    <!-- 顶部：丝绸背景 + 宝丽来卡片 -->
+    <section class="top">
+      <SilkBackground />
+      <div class="strip-wrap">
+        <PolaroidStrip :items="polaroids" />
       </div>
     </section>
 
-    <section class="section" v-reveal>
-      <div class="container">
-        <h2 class="section-title">{{ t('about.experience') }}</h2>
-        <ul class="timeline">
-          <li v-for="item in visibleExperience" :key="item.name.en" class="timeline-item">
-            <span class="avatar" :style="{ background: item.gradient }">{{ item.logo }}</span>
-            <div class="item-main">
-              <span class="item-name">{{ item.name[locale] }}</span>
-              <span class="item-role">{{ item.role[locale] }} · {{ item.period }}</span>
-            </div>
-          </li>
-        </ul>
-        <button v-if="hiddenCount" class="toggle" type="button" @click="showAll = !showAll">
-          {{ showAll ? t('about.showLess') : `${t('about.showMore')} (${hiddenCount})` }}
-        </button>
-      </div>
-    </section>
-
-    <section class="section" v-reveal>
-      <div class="container">
-        <h2 class="section-title">{{ t('about.education') }}</h2>
-        <ul class="timeline">
-          <li v-for="item in education" :key="item.name.en" class="timeline-item">
-            <span class="avatar" :style="{ background: item.gradient }">{{ item.logo }}</span>
-            <div class="item-main">
-              <span class="item-name">{{ item.name[locale] }}</span>
-              <span class="item-role">{{ item.major[locale] }}</span>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="section" v-reveal>
-      <div class="container">
-        <h2 class="section-title">{{ t('about.whatido') }}</h2>
-        <div class="chip-grid">
-          <span v-for="item in whatIDo[locale]" :key="item" class="chip">{{ item }}</span>
+    <!-- 介绍卡片 -->
+    <section class="intro-outer">
+      <div class="container-narrow" v-reveal>
+        <div class="intro-card">
+          <h2 class="intro-title">
+            {{ t('about.titlePrefix') }}<span class="name-underline">{{ locale === 'zh' ? '刘坤' : 'Liu Kun' }}</span>{{ locale === 'zh' ? '。' : '.' }}
+          </h2>
+          <p class="para" v-html="t('about.p1')"></p>
+          <p class="para" v-html="t('about.p2')"></p>
+          <p class="para" v-html="t('about.p3')"></p>
         </div>
       </div>
     </section>
 
-    <section class="section" v-reveal>
-      <div class="container">
-        <h2 class="section-title">{{ t('about.stack') }}</h2>
-        <div class="chip-grid">
-          <span v-for="item in stack" :key="item.label" class="chip">
-            <img
-              v-if="item.icon"
-              :src="`https://cdn.simpleicons.org/${item.icon}`"
-              :alt="item.label"
-              loading="lazy"
-            />
-            {{ item.label }}
-          </span>
+    <!-- 工作经历 -->
+    <section class="block">
+      <div class="container-narrow" v-reveal>
+        <h3 class="section-label">{{ t('about.experience') }}</h3>
+        <div class="soft-panel exp-panel" :class="{ collapsed: !showAll }">
+          <div v-for="item in expList" :key="item.name.en" class="exp-row">
+            <span class="avatar" :style="{ background: item.gradient }">{{ item.logo }}</span>
+            <div class="row-main">
+              <div class="row-name">{{ item.name[locale] }}</div>
+              <div class="row-meta">{{ item.role[locale] }} <span class="dot">·</span> {{ item.period }}</div>
+            </div>
+          </div>
+          <button v-if="hiddenCount" class="more-btn" type="button" @click="showAll = !showAll">
+            {{ showAll ? t('about.showLess') : `${t('about.showMore')} ${hiddenCount}` }}
+            <svg :class="{ flip: showAll }" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </button>
         </div>
+      </div>
+    </section>
+
+    <!-- 教育背景 -->
+    <section class="block">
+      <div class="container-narrow" v-reveal>
+        <h3 class="section-label">{{ t('about.education') }}</h3>
+        <div class="soft-panel">
+          <div v-for="item in education" :key="item.name.en" class="exp-row">
+            <span class="avatar edu" :style="{ background: item.gradient }">{{ item.logo }}</span>
+            <div class="row-main">
+              <div class="row-name">{{ item.name[locale] }}</div>
+              <div class="row-meta">{{ item.major[locale] }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 我能做什么 -->
+    <section class="block">
+      <div class="container-narrow" v-reveal>
+        <h3 class="section-label">{{ t('about.whatido') }}</h3>
+        <div class="soft-panel wi-panel">
+          <span
+            v-for="(item, i) in whatIDo[locale]"
+            :key="item"
+            class="wchip"
+            :class="i % 2 === 0 ? 'solid' : 'outline'"
+          >{{ item }}</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 技术栈：物理下落 -->
+    <section class="block">
+      <div class="container-narrow" v-reveal>
+        <h3 class="section-label">{{ t('about.stack') }}</h3>
+        <StackPhysics :pills="stackPills" />
       </div>
     </section>
   </div>
 </template>
 
 <style scoped>
-.page-head {
-  padding: 64px 0 8px;
+.top {
+  position: relative;
+  padding: 150px 0 60px;
+  overflow: hidden;
 }
 
-.heading {
-  font-size: clamp(1.8rem, 4.5vw, 2.4rem);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  margin-bottom: 18px;
+.strip-wrap {
+  position: relative;
+  z-index: 1;
+}
+
+.intro-outer {
+  padding: 20px 0 10px;
+}
+
+.intro-card {
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background: var(--card);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  padding: 40px 32px;
+}
+
+@media (min-width: 640px) {
+  .intro-card {
+    padding: 48px 44px;
+  }
+}
+
+.intro-title {
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  margin-bottom: 24px;
+}
+
+.name-underline {
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 6px;
+  text-decoration-color: color-mix(in srgb, var(--text) 45%, transparent);
 }
 
 .para {
+  font-size: 16.5px;
+  line-height: 1.75;
   color: var(--text-muted);
-  margin-bottom: 14px;
-  max-width: 640px;
+  margin-bottom: 16px;
+}
+
+.para:last-child {
+  margin-bottom: 0;
 }
 
 .para :deep(strong) {
   color: var(--text);
-  font-weight: 600;
+  font-weight: 700;
 }
 
-.timeline {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.block {
+  padding: 26px 0 6px;
+}
+
+.exp-panel {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 10px;
+  max-height: 400px;
 }
 
-.timeline-item {
+.exp-panel.collapsed {
+  max-height: 178px;
+  overflow: hidden;
+}
+
+.exp-panel.collapsed::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 90px;
+  background: linear-gradient(to bottom, transparent, var(--bg-soft) 85%);
+  pointer-events: none;
+}
+
+.exp-row {
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 14px 16px;
-  border: 1px solid var(--border);
-  border-radius: 14px;
   background: var(--card);
+  border-radius: 16px;
+  padding: 12px 16px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
 .avatar {
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   border-radius: 12px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   color: #fff;
+  font-size: 18px;
   font-weight: 700;
-  font-size: 1.05rem;
   flex-shrink: 0;
 }
 
-.item-main {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.45;
-}
-
-.item-name {
-  font-weight: 600;
-  font-size: 0.97rem;
-}
-
-.item-role {
-  color: var(--text-muted);
-  font-size: 0.86rem;
-}
-
-.toggle {
-  margin-top: 14px;
-  border: none;
-  background: none;
-  color: var(--text-muted);
-  font-size: 0.88rem;
-  padding: 4px 0;
-}
-
-.toggle:hover {
+.avatar.edu {
+  background: var(--card);
+  border: 1px solid var(--border);
   color: var(--text);
 }
 
-.chip-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+.row-name {
+  font-size: 16.5px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  line-height: 1.35;
 }
 
-@media (max-width: 640px) {
-  .page-head {
-    padding: 44px 0 8px;
-  }
+.row-meta {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.dot {
+  margin: 0 3px;
+}
+
+.more-btn {
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  transform: translateX(-50%);
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: none;
+  background: var(--bg-soft);
+  padding: 6px 12px;
+  border-radius: 10px;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.more-btn svg {
+  transition: transform 0.2s ease;
+}
+
+.more-btn svg.flip {
+  transform: rotate(180deg);
+}
+
+.wi-panel {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding: 22px 18px;
+}
+
+.wchip {
+  padding: 9px 18px;
+  border-radius: 999px;
+  font-size: 15px;
+  letter-spacing: -0.1px;
+}
+
+.wchip.solid {
+  background: var(--chip-solid);
+}
+
+.wchip.outline {
+  background: var(--card);
+  border: 1px solid var(--border);
 }
 </style>

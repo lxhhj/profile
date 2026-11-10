@@ -1,13 +1,12 @@
 <script setup>
-import SiteNav from './components/SiteNav.vue'
-import SiteFooter from './components/SiteFooter.vue'
+import FloatingNav from './components/FloatingNav.vue'
 import ConnectSection from './components/ConnectSection.vue'
 </script>
 
 <template>
-  <div class="site">
-    <SiteNav />
-    <main class="site-main">
+  <div class="shell">
+    <FloatingNav />
+    <main>
       <router-view v-slot="{ Component }">
         <transition name="page" mode="out-in">
           <component :is="Component" />
@@ -15,18 +14,12 @@ import ConnectSection from './components/ConnectSection.vue'
       </router-view>
     </main>
     <ConnectSection />
-    <SiteFooter />
+    <div class="footer-space" aria-hidden="true"></div>
   </div>
 </template>
 
 <style scoped>
-.site {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-.site-main {
-  flex: 1;
+.footer-space {
+  height: 64px;
 }
 </style>

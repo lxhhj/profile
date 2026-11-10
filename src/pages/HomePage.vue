@@ -1,37 +1,61 @@
 <script setup>
-import { profile } from '../data/profile'
 import { featuredProjects } from '../data/projects'
+import { profile } from '../data/profile'
 import { useI18n } from '../i18n'
 import ProjectCard from '../components/ProjectCard.vue'
+import SilkBackground from '../components/SilkBackground.vue'
+import logo from '../assets/logo.jpg'
 
 const { t } = useI18n()
 </script>
 
 <template>
   <div>
-    <!-- Hero -->
+    <!-- Hero：满屏丝绸背景 + 左文右图 -->
     <section class="hero">
-      <div class="container">
-        <p class="greeting" v-reveal>{{ t('hero.greeting') }}</p>
-        <h1 class="hero-title" v-reveal>{{ t('hero.title') }}</h1>
-        <p class="intro" v-reveal>{{ t('hero.intro') }}</p>
-        <div class="hero-actions" v-reveal>
-          <a class="btn btn-primary" :href="`mailto:${profile.email}`">{{ t('hero.contact') }}</a>
-          <router-link class="btn btn-ghost" to="/projects">{{ t('hero.seeWork') }}</router-link>
+      <SilkBackground />
+      <div class="container-wide hero-grid">
+        <div class="hero-text" v-reveal>
+          <p class="greeting">{{ t('hero.greeting') }}</p>
+          <h1 class="hero-title">{{ t('hero.title') }}</h1>
+          <p class="intro">{{ t('hero.intro') }}</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" :href="`mailto:${profile.email}`">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="3" />
+                <path d="m2 7 10 6L22 7" />
+              </svg>
+              {{ t('hero.contact') }}
+            </a>
+            <router-link class="btn btn-ghost" to="/projects">
+              {{ t('hero.seeWork') }}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </router-link>
+          </div>
+        </div>
+        <div class="hero-photo" v-reveal>
+          <img :src="logo" alt="avatar" />
         </div>
       </div>
     </section>
 
-    <!-- Featured projects -->
-    <section class="section" v-reveal>
-      <div class="container">
-        <h2 class="section-title">{{ t('home.projectsTitle') }}</h2>
-        <p class="subtitle">{{ t('home.projectsSubtitle') }}</p>
+    <!-- 精选项目 -->
+    <section class="projects" v-reveal>
+      <div class="container-wide">
+        <h2 class="projects-title">{{ t('home.projectsTitle') }}</h2>
+        <p class="projects-sub">{{ t('home.projectsSubtitle') }}</p>
         <div class="grid">
           <ProjectCard v-for="p in featuredProjects" :key="p.title" :project="p" />
         </div>
         <div class="view-all">
-          <router-link to="/projects">{{ t('home.viewAll') }} →</router-link>
+          <router-link class="btn btn-ghost" to="/projects">
+            {{ t('home.viewAll') }}
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </router-link>
         </div>
       </div>
     </section>
@@ -40,28 +64,51 @@ const { t } = useI18n()
 
 <style scoped>
 .hero {
-  padding: 88px 0 56px;
+  position: relative;
+  min-height: calc(100vh - 120px);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  align-items: center;
+  padding-top: 130px;
+  padding-bottom: 70px;
+}
+
+@media (min-width: 900px) {
+  .hero-grid {
+    grid-template-columns: 1.05fr 0.95fr;
+  }
 }
 
 .greeting {
-  font-size: 1.05rem;
-  color: var(--text-muted);
+  font-size: 20px;
+  letter-spacing: -0.3px;
   margin-bottom: 12px;
 }
 
 .hero-title {
-  font-size: clamp(2.2rem, 6vw, 3.4rem);
-  line-height: 1.15;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  margin-bottom: 18px;
-  max-width: 640px;
+  font-size: clamp(40px, 6vw, 58px);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.06;
+  margin-bottom: 22px;
+  max-width: 560px;
 }
 
 .intro {
+  font-size: 20px;
+  line-height: 1.55;
   color: var(--text-muted);
-  max-width: 560px;
-  margin-bottom: 28px;
+  max-width: 440px;
+  margin-bottom: 32px;
 }
 
 .hero-actions {
@@ -70,37 +117,54 @@ const { t } = useI18n()
   flex-wrap: wrap;
 }
 
-.subtitle {
+.hero-photo {
+  justify-self: center;
+  width: min(420px, 100%);
+}
+
+.hero-photo img {
+  width: 100%;
+  aspect-ratio: 1 / 1.02;
+  object-fit: cover;
+  border-radius: 28px;
+  border: 10px solid var(--card);
+  box-shadow: var(--shadow-card), var(--shadow-float);
+}
+
+.projects {
+  padding: 60px 0 30px;
+}
+
+.projects-title {
+  text-align: center;
+  font-size: clamp(36px, 5vw, 48px);
+  font-weight: 500;
+  letter-spacing: -1.2px;
+  margin-bottom: 14px;
+}
+
+.projects-sub {
+  text-align: center;
+  font-size: 19px;
+  line-height: 1.55;
   color: var(--text-muted);
-  font-size: 0.95rem;
-  margin: -12px 0 20px;
+  max-width: 560px;
+  margin: 0 auto 46px;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 18px;
+  gap: 26px;
 }
 
 .view-all {
-  margin-top: 20px;
-  font-size: 0.95rem;
+  display: flex;
+  justify-content: center;
+  margin-top: 38px;
 }
 
-.view-all a {
-  color: var(--text-muted);
-  transition: color 0.15s ease;
-}
-
-.view-all a:hover {
-  color: var(--text);
-}
-
-@media (max-width: 640px) {
-  .hero {
-    padding: 60px 0 44px;
-  }
-
+@media (max-width: 760px) {
   .grid {
     grid-template-columns: 1fr;
   }

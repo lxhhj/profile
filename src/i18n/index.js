@@ -31,6 +31,7 @@ export const messages = {
     },
     about: {
       title: "Hello! I'm Liu Kun.",
+      titlePrefix: "Hello! I'm ",
       p1: 'A <strong>full-stack engineer</strong> who enjoys turning ideas into useful, well-crafted software. I care about the whole product — from product thinking and system design down to hands-on engineering.',
       p2: 'Over the years I have built <strong>web platforms, backend services, data tools, and mobile apps</strong>. The domains change, but the approach stays the same: find a real problem, simplify it, and keep building until it works.',
       p3: 'I love making things. My goal is to <strong>make everyday life a little easier through products that just work</strong> — and to keep learning along the way.',
@@ -69,6 +70,7 @@ export const messages = {
     },
     about: {
       title: '你好！我是刘坤。',
+      titlePrefix: '你好！我是',
       p1: '一名喜欢把想法变成实用、精工软件的<strong>全栈工程师</strong>。我关注产品的整体 —— 从产品思考、系统设计，到动手写代码。',
       p2: '这些年我做过<strong>Web 平台、后端服务、数据工具和移动应用</strong>。领域在变，但方法始终不变：找到真实的问题，把它简化，然后持续构建直到可用。',
       p3: '我热爱创造。我的目标是<strong>用能真正跑起来的产品，让日常生活更轻松一点</strong> —— 同时在路上不断学习。',

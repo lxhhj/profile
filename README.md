@@ -39,7 +39,7 @@ npm run preview  # 本地预览构建结果
 - [Vite](https://vite.dev/)
 - [Vue Router](https://router.vuejs.org/)
 - 无 UI 框架依赖，纯手写 CSS（CSS 变量主题系统）
-- 技术栈图标来自 [Simple Icons CDN](https://simpleicons.org/)
+- 头像与技术栈图标使用 `src/assets/logo.jpg`（可替换为自己的图片）
 
 ## 部署（GitHub Pages）
 

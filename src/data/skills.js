@@ -1,5 +1,5 @@
 // 能力清单 & 技术栈 —— 在这里修改
-// icon 为 Simple Icons（https://simpleicons.org）的 slug，留空则只显示文字
+// stackPills：物理下落药丸，color 为品牌色，dark: true 表示浅色底配深色文字
 export const whatIDo = {
   en: [
     '0-to-1 Product Building',
@@ -27,17 +27,17 @@ export const whatIDo = {
   ],
 }
 
-export const stack = [
-  { icon: 'vue', label: 'Vue' },
-  { icon: 'typescript', label: 'TypeScript' },
-  { icon: 'javascript', label: 'JavaScript' },
-  { icon: 'nodedotjs', label: 'Node.js' },
-  { icon: 'vite', label: 'Vite' },
-  { icon: 'pinia', label: 'Pinia' },
-  { icon: 'python', label: 'Python' },
-  { icon: 'docker', label: 'Docker' },
-  { icon: 'mysql', label: 'MySQL' },
-  { icon: 'redis', label: 'Redis' },
-  { icon: 'git', label: 'Git' },
-  { icon: 'linux', label: 'Linux' },
+export const stackPills = [
+  { slug: 'vue', label: 'Vue', color: '#42b883' },
+  { slug: 'typescript', label: 'TypeScript', color: '#3178c6' },
+  { slug: 'javascript', label: 'JavaScript', color: '#f7df1e', dark: true },
+  { slug: 'nodedotjs', label: 'Node.js', color: '#5fa04e' },
+  { slug: 'vite', label: 'Vite', color: '#646cff' },
+  { slug: 'pinia', label: 'Pinia', color: '#f7d336', dark: true },
+  { slug: 'python', label: 'Python', color: '#3776ab' },
+  { slug: 'docker', label: 'Docker', color: '#2496ed' },
+  { slug: 'mysql', label: 'MySQL', color: '#4479a1' },
+  { slug: 'redis', label: 'Redis', color: '#ff4438' },
+  { slug: 'git', label: 'Git', color: '#f05032' },
+  { slug: 'linux', label: 'Linux', color: '#fcc624', dark: true },
 ]

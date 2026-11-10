@@ -1,10 +1,13 @@
 import { createApp } from 'vue'
+import Lenis from 'lenis'
 import App from './App.vue'
 import router from './router'
-import { initTheme } from './composables/useTheme'
+import './composables/useTheme'
 import './styles/main.css'
 
-initTheme()
+// Lenis 平滑滚动（与参考站一致的滚动手感）
+const lenis = new Lenis({ lerp: 0.1, autoRaf: true })
+lenis.on('scroll', () => {})
 
 const app = createApp(App)
 

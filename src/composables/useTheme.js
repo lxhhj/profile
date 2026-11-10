@@ -1,24 +1,17 @@
+import { ref, watchEffect } from 'vue'
+
 const STORAGE_KEY = 'portfolio-theme'
 
-function preferred() {
-  return localStorage.getItem(STORAGE_KEY) || 'light'
-}
+const theme = ref(localStorage.getItem(STORAGE_KEY) || 'light')
 
-function apply(theme) {
-  document.documentElement.classList.toggle('dark', theme === 'dark')
-}
-
-export function initTheme() {
-  apply(preferred())
-}
+watchEffect(() => {
+  document.documentElement.classList.toggle('dark', theme.value === 'dark')
+})
 
 export function useTheme() {
-  const theme = preferred()
   const toggleTheme = () => {
-    const next = theme === 'dark' ? 'light' : 'dark'
-    localStorage.setItem(STORAGE_KEY, next)
-    apply(next)
-    window.location.reload()
+    theme.value = theme.value === 'dark' ? 'light' : 'dark'
+    localStorage.setItem(STORAGE_KEY, theme.value)
   }
-  return { toggleTheme, isDark: theme === 'dark' }
+  return { theme, isDark: theme, toggleTheme }
 }

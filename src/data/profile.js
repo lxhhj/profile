@@ -2,14 +2,16 @@
 export const profile = {
   name: { en: 'Liu Kun', zh: '刘坤' },
   email: 'liukun6356@gmail.com',
-  github: 'https://github.com/liukun6356',
+  github: 'https://github.com/lxhhj',
   x: 'https://x.com/',
+  douyin: '#',
   githubStars: '60+', // GitHub star 展示数字，可自行修改
 }
 
-// 社交徽章（页脚 / 联系区展示）
+// 社交徽章（联系卡右侧图标，meta 为红色角标数字，留空则不显示）
 export const socials = [
-  { type: 'github', label: 'GitHub', meta: `★60+`, href: profile.github },
   { type: 'email', label: 'Email', meta: '', href: `mailto:${profile.email}` },
-  { type: 'x', label: 'X / Twitter', meta: '', href: profile.x },
+  { type: 'github', label: 'GitHub', meta: `★${profile.githubStars}`, href: profile.github },
+  { type: 'x', label: 'X / Twitter', meta: '1', href: profile.x },
+  { type: 'douyin', label: '抖音', meta: '1,163', href: profile.douyin },
 ]
