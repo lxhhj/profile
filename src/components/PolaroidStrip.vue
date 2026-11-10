@@ -45,6 +45,26 @@ const rotations = [-10, -6, -2, 3, 7, 11]
   flex-shrink: 0;
 }
 
+/* 悬停：朝卡片自身倾斜方向抖动一下 */
+.polaroid:hover {
+  animation: wobble 0.55s ease-in-out;
+}
+
+@keyframes wobble {
+  0% {
+    transform: rotate(var(--r));
+  }
+  30% {
+    transform: rotate(calc(var(--r) + 5deg)) scale(1.04);
+  }
+  60% {
+    transform: rotate(calc(var(--r) - 3deg)) scale(1.02);
+  }
+  100% {
+    transform: rotate(var(--r)) scale(1);
+  }
+}
+
 .cover {
   width: 124px;
   height: 156px;
