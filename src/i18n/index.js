@@ -11,7 +11,7 @@ setDocLang()
 
 export const messages = {
   en: {
-    nav: { home: 'Home', projects: 'Projects', about: 'About' },
+    nav: { home: 'Home', projects: 'Projects', about: 'About', skip: 'Skip to main content' },
     hero: {
       greeting: "Hey 👋, I'm Liu Kun",
       title: 'Full-stack engineer & product builder',
@@ -51,7 +51,7 @@ export const messages = {
     footer: { made: 'Built with Vue 3 + Vite' },
   },
   zh: {
-    nav: { home: '首页', projects: '项目', about: '关于' },
+    nav: { home: '首页', projects: '项目', about: '关于', skip: '跳到主要内容' },
     hero: {
       greeting: '你好 👋，我是刘坤',
       title: '全栈工程师 & 产品构建者',

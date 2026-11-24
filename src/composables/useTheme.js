@@ -2,7 +2,14 @@ import { ref, watchEffect } from 'vue'
 
 const STORAGE_KEY = 'portfolio-theme'
 
-const theme = ref(localStorage.getItem(STORAGE_KEY) || 'light')
+// 首次访问（无本地记录）跟随系统偏好；之后以用户手动选择为准
+function preferred() {
+  const saved = localStorage.getItem(STORAGE_KEY)
+  if (saved) return saved
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+}
+
+const theme = ref(preferred())
 
 watchEffect(() => {
   document.documentElement.classList.toggle('dark', theme.value === 'dark')

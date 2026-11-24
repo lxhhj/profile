@@ -5,9 +5,12 @@ import router from './router'
 import './composables/useTheme'
 import './styles/main.css'
 
-// Lenis 平滑滚动（与参考站一致的滚动手感）
-const lenis = new Lenis({ lerp: 0.1, autoRaf: true })
-lenis.on('scroll', () => {})
+// Lenis 平滑滚动（与参考站一致的滚动手感）；尊重系统"减少动态效果"偏好
+const lenis =
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ? null
+    : new Lenis({ lerp: 0.1, autoRaf: true })
+if (lenis) lenis.on('scroll', () => {})
 
 const app = createApp(App)
 

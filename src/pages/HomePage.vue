@@ -126,6 +126,11 @@ const { t } = useI18n()
   border-radius: 28px;
   border: 10px solid var(--card);
   box-shadow: var(--shadow-card), var(--shadow-float);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero-photo:hover img {
+  transform: scale(1.02);
 }
 
 .projects {
