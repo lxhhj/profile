@@ -102,7 +102,7 @@ const { t } = useI18n()
 .title {
   font-size: clamp(34px, 5vw, 48px);
   font-weight: 500;
-  letter-spacing: -1.2px;
+  letter-spacing: -0.02em;
   line-height: 1.1;
   margin-bottom: 18px;
 }
@@ -175,6 +175,7 @@ const { t } = useI18n()
   padding: 3px 7px;
   border-radius: 999px;
   white-space: nowrap;
+  font-variant-numeric: tabular-nums;
 }
 
 .caption {

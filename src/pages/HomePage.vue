@@ -141,7 +141,7 @@ const { t } = useI18n()
   text-align: center;
   font-size: clamp(36px, 5vw, 48px);
   font-weight: 500;
-  letter-spacing: -1.2px;
+  letter-spacing: -0.02em;
   margin-bottom: 14px;
 }
 

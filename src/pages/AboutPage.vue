@@ -75,7 +75,7 @@ const polaroids = projects.slice(0, 5).map((p) => ({
             <span class="avatar" :style="{ background: item.gradient }">{{ item.logo }}</span>
             <div class="row-main">
               <div class="row-name">{{ item.name[locale] }}</div>
-              <div class="row-meta">{{ item.role[locale] }} <span class="dot">·</span> {{ item.period }}</div>
+              <div class="row-meta tabular">{{ item.role[locale] }} <span class="dot">·</span> {{ item.period }}</div>
             </div>
           </div>
           <button v-if="hiddenCount" class="more-btn" type="button" @click="showAll = !showAll">
@@ -169,7 +169,7 @@ const polaroids = projects.slice(0, 5).map((p) => ({
 .intro-title {
   font-size: 30px;
   font-weight: 500;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.02em;
   margin-bottom: 24px;
 }
 
@@ -197,7 +197,7 @@ const polaroids = projects.slice(0, 5).map((p) => ({
 }
 
 .block {
-  padding: 26px 0 6px;
+  padding: 30px 0 6px;
 }
 
 .exp-panel {

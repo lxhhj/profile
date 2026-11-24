@@ -60,6 +60,8 @@ body {
   color: var(--text);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  font-optical-sizing: auto;
+  text-rendering: optimizeLegibility;
   transition: background 0.3s ease, color 0.3s ease;
 }
 
@@ -125,6 +127,12 @@ h3 {
 
 p {
   text-wrap: pretty;
+}
+
+/* ---------- 数字等宽（年份/计数对齐） ---------- */
+.tabular,
+.item-meta {
+  font-variant-numeric: tabular-nums;
 }
 
 /* ---------- 跳转正文链接 ---------- */
@@ -234,7 +242,7 @@ p {
 .section-label {
   font-size: 16px;
   font-weight: 700;
-  letter-spacing: -0.2px;
+  letter-spacing: -0.01em;
   margin: 0 0 12px 4px;
 }
 

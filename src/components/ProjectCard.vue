@@ -97,21 +97,23 @@ const { locale } = useI18n()
 .headline {
   font-size: 23px;
   font-weight: 600;
-  letter-spacing: -0.4px;
+  letter-spacing: -0.02em;
   line-height: 1.3;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .desc {
   font-size: 15.5px;
   color: var(--text-muted);
   line-height: 1.55;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   flex: 1;
 }
 
 .tags {
   font-size: 13px;
+  line-height: 1.3;
   color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
 }
 </style>
