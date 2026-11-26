@@ -49,6 +49,7 @@ export const messages = {
       seeProjects: 'See projects',
     },
     footer: { made: 'Built with Vue 3 + Vite' },
+    site: { space: 'Personal product space' },
   },
   zh: {
     nav: { home: '首页', projects: '项目', about: '关于', skip: '跳到主要内容' },
@@ -88,6 +89,7 @@ export const messages = {
       seeProjects: '看看项目',
     },
     footer: { made: '使用 Vue 3 + Vite 构建' },
+    site: { space: '个人产品空间' },
   },
 }
 
