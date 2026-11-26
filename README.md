@@ -1,6 +1,6 @@
 # Vue Portfolio 个人作品集网站
 
-一个使用 **Vue 3 + Vite + Vue Router** 实现的个人作品集网站，线上地址：**https://lxhhj.pw/**
+一个使用 **Vue 3 + Vite + Vue Router** 实现的个人作品集网站，线上地址：**https://lxhhj.bond/**
 
 > 页面中的姓名、经历、项目均为**示例占位内容**，请替换为你自己的信息。
 
@@ -43,6 +43,6 @@ npm run preview  # 本地预览构建结果
 
 ## 部署（GitHub Pages + 自定义域名）
 
-已配置 GitHub Actions 自动部署（`.github/workflows/deploy.yml`）：推送到 `main` 即自动构建并发布到 **https://lxhhj.pw/**（自定义域名，DNS 托管于阿里云）。
+已配置 GitHub Actions 自动部署（`.github/workflows/deploy.yml`）：推送到 `main` 即自动构建并发布到 **https://lxhhj.bond/**（自定义域名，DNS 托管于阿里云）。
 
-> 注意：`vite.config.js` 中的 `base: '/'` 对应自定义域名根路径部署；`public/CNAME` 内容为 `lxhhj.pw`。若更换域名，需同步修改这两处。
+> 注意：`vite.config.js` 中的 `base: '/'` 对应自定义域名根路径部署；`public/CNAME` 内容为 `lxhhj.bond`。若更换域名，需同步修改这两处。
